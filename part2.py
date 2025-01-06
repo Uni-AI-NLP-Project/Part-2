@@ -1,8 +1,11 @@
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
-# Load the Reddit dataset
-df = pd.read_csv('Reddit_Data.csv')
+# Load the Twitter dataset
+df = pd.read_csv('Twitter_Data.csv')
+
+# Handle missing values (drop rows with missing sentiment labels)
+df = df.dropna(subset=['category'])
 
 # Define the target column (category for sentiment classification)
 y_true = df['category']
@@ -20,6 +23,8 @@ accuracy = accuracy_score(y_true, y_pred)
 precision = precision_score(y_true, y_pred, average='macro', zero_division=1)
 recall = recall_score(y_true, y_pred, average='macro', zero_division=1)
 
+# Print results
 print(f"Accuracy: {accuracy}")
 print(f"Precision: {precision}")
 print(f"Recall: {recall}")
+
